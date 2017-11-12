@@ -19,16 +19,7 @@ var App = {
                     App.Player.on('status', function (status) {
                         if (status.playerState == "IDLE" && App.playin == false) {
                             App.Player.stop();
-                            App.playin = true;
-                            var mediaAmazonDoesNotPush = {
-                                contentId: "https://iqmeta.com/chikalicka_bing.mp3",
-                                contentType: 'audio/mp3',
-                                streamType: 'BUFFERED'
-                            };
-                            App.Player.load(mediaAmazonDoesNotPush, { autoplay: true }, function (err, status) {
-                                callback('Pushed Audio');
-                                client.close();
-                            });
+                            client.close();
                         }
                     });
                 });
@@ -42,7 +33,7 @@ var App = {
     },
     run: function (ip, text) {
         App.DeviceIp = ip;
-        var lang = "en"; //de-DE
+        var lang = "en";
         GoogleTTS(text, lang, 1).then(function (url) {
             App.GoogleHome(App.DeviceIp, url, function (res) {
                 console.log(res);
@@ -51,4 +42,4 @@ var App = {
     }
 };
 
-App.run("192.168.178.158", "Well, this a pushed Notification to Google Home... let's play some Push Sound for Amazon Echo ");
+App.run("192.168.0.103", "Well, this is a pushed Notification to Google Home... Bye now!");
